@@ -1,10 +1,15 @@
 package Practise_29April;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HandleFrames {
 
@@ -43,6 +48,27 @@ public class HandleFrames {
 		js.executeScript("arguments[0].click();", SelectRadio);
 
 		driver.switchTo().defaultContent();
+		
+		// Switching to Fifth Frame
+
+		WebElement frame5 = driver.findElement(By.xpath("//frame[@src='frame_5.html']"));
+		driver.switchTo().frame(frame5);
+		driver.findElement(By.xpath("//input[@name='mytext5']")).sendKeys("Iframe 5");
+		
+		//Clicks on Link
+		driver.findElement(By.xpath("//a[.='https://a9t9.com']")).click();
+	//	WebElement logo = driver.findElement(By.xpath("//a[@id='logo']"));
+		WebDriverWait wait= new WebDriverWait(driver,Duration.ofSeconds(10)); //Explicit wait 
+		try
+		{
+	    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@id='logo']")));
+	    System.out.println("Logo is Present");
+		}
+		catch(Exception e)
+		{
+			System.out.println("Logo is not Present");
+		}
+	
 		
 	}
 
